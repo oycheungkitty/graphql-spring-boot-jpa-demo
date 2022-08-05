@@ -1,0 +1,42 @@
+system:
+  db:
+    url: localhost
+    name: graphql
+spring:
+  datasource:
+    url: jdbc:mysql://${system.db.url}/${system.db.name}?allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&character_set_server=utf8mb4&useUnicode=true&autoReconnect=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: graphql
+    password: dev
+    hikari:
+      minimumIdle: 10
+      maximumPoolSize: 20
+      idleTimeout: 10000
+      poolName: Pool
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+  flyway:
+    locations: classpath:/db
+
+graphql:
+  spqr:
+    gui:
+      enabled: true
+    relay:
+      enable: true
+      connection-check-relaxed: true
+      spring-data-compatible: false
+    abstract-input-type-resolution: true
+
+
+
